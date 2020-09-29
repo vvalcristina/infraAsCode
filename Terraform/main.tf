@@ -4,16 +4,16 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias = "west"
-  region  = "us-west-2"
+  region  = "us-east-1"
   version = "~> 2.0"
+  alias = "usw2"
 }
 
 terraform {
   backend "s3" {
     # Lembre de trocar o bucket para o seu, não pode ser o mesmo nome
-    bucket = "tfstate-terraform-test"
-    key    = "terraform-test.tfstate"
+    bucket = "learn-terraform-linuxtips"
+    key    = "learn-terraform.tfstate"
     region = "us-east-1"
   }
 }

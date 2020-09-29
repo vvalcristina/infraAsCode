@@ -3,32 +3,20 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["TFState-${var.hash_commit}"]
+    values = ["IaaSWeek-${var.hash_commit}"]
   }
 
-  owners = ["178520105998"] #My User
+  owners = ["178520105998"] # Gomex ID, não mude sem mudar o filtro
 }
 
 resource "aws_instance" "web" {
-  count = 2
+  count = var.servers
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   subnet_id = "subnet-ae04f49f"
   
   
-
   tags = {
     Name = "HelloWorld"
   }
 }
-
-resource "aws_instance" "west" {
-  provider = aws.west
-  ami           = "ami-06d51e91cea0dac8d"
-  instance_type = "t2.micro"
-  
-  tags = {
-    Name = "HelloWorld"
-  }
-}
-
